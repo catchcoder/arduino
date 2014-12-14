@@ -1,5 +1,6 @@
 // http://blog.riyas.org/2013/12/online-led-matrix-font-generator-with.html for Matrix Code
 // https://www.sparkfun.com/products/12708 for RTC
+// Based on http://blog.atmel.com/2014/12/01/build-your-own-micro-word-clock-with-an-atmega328p/
 
 unsigned char i;
 
