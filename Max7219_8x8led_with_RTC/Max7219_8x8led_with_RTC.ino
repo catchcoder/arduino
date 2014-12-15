@@ -22,6 +22,8 @@ byte year = 0;
 byte five_minutes = 0;
 byte hour_selected = 0;
 
+byte flash = 0; //
+
 //Words for minutes past and to
 unsigned char time_1ed[12][8]={
   { 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 }  , //on the hour 
@@ -52,7 +54,13 @@ unsigned char hour_led[12][8]={
   { 0x00,0x00,0x00,0xf0,0x00,0x00,0x00,0x00 }  , //nine
   { 0x00,0x00,0x00,0x01,0x01,0x01,0x00,0x00 }  , //ten
   { 0x00,0x00,0x00,0x00,0x00,0x3f,0x00,0x00 }  ,// eleven
-  { 0x00,0x00,0x00,0x00,0x10,0x76,0x00,0x00 }   // twelve
+  { 0x00,0x00,0x00,0x00,0x00,0xf6,0x00,0x00 }  , //twelve
+//  { 0x00,0x00,0x00,0x00,0x10,0x76,0x00,0x00 }   // twelve
+};
+
+unsigned char second_led[2][8]={
+{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // seconds flash off
+{0x00,0x00,0x20,0x00,0x00,0x00,0x00,0x00}  // seonds flashh on
 };
 
 void Write_Max7219_byte(unsigned char DATA) 
@@ -150,10 +158,22 @@ void loop()
     five_minutes = 12;
   }
 
+  if ((second %2 )==0  ){
+    flash =0;
+  }
+  else {
+    flash =1;
+  }
+    Serial.println  (second % 2) ;
   //Display word on 8x8 LED matrix
   // Add together the top half of the matrix to the lower half
   for(i=1;i<9;i++)
-    Write_Max7219(i,time_1ed[five_minutes-1][i-1]+ hour_led[hour-1][i-1]);
+    if (i ==3){
+      Write_Max7219(i,time_1ed[five_minutes-1][i-1]+ hour_led[hour-1][i-1]+ second_led[flash][i-1]);
+    }
+    else {
+      Write_Max7219(i,time_1ed[five_minutes-1][i-1]+ hour_led[hour-1][i-1]);
+    }
   delay(1000);
 }
 
