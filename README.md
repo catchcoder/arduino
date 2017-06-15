@@ -12,8 +12,8 @@ How to scare trick or treaters with a delayed evil laugh when the door is opened
 
 **Connecting it all together**
 
- 1.  Connect the door contact to pin 2 and 5v 
- 2. Connect the 10k resistor connected to pin 2 and the other her end to ground 
+ 1. Connect the door contact to pin 2 and 5v 
+ 2. Connect the 10k resistor connected to pin 2 and ground 
  3. Connect the speakers (mono) to pin 11 and ground 
 
 **Extra software required:** 
